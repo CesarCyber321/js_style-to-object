@@ -7,19 +7,21 @@
  */
 function convertToObject(sourceString) {
   // write your code here
-  const result = {};
-  const keyValuePairs = sourceString.split(';');
 
-  for (const item of keyValuePairs) {
-    if (!item.trim()) continue;
-    const parts = item.split(':');
-    const key = parts[0].trim();
-    const value = parts[1].trim();
+  return sourceString
+    .split(';')
+    .filter((item) => item.trim())
+    .map((item) => {
+      const [key, value] = item.split(':');
 
-    result[key] = value;
-  }
+      return [key.trim(), value.trim()];
+    })
 
-  return result;
+    .reduce((obj, [key, value]) => {
+      obj[key] = value;
+
+      return obj;
+    }, {});
 }
 
 module.exports = convertToObject;
