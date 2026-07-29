@@ -17,10 +17,8 @@ function convertToObject(sourceString) {
       return [key.trim(), value.trim()];
     })
 
-    .reduce((obj, [key, value]) => {
-      obj[key] = value;
-
-      return obj;
+    .reduce((acc, [key, value]) => {
+      return { ...acc, [key]: value };
     }, {});
 }
 
